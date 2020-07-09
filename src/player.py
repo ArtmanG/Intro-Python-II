@@ -2,8 +2,17 @@
 # currently.
 
 class Player:
-    def __init__(self, name, cRoom):
+    def __init__(self, name, currentRoom):
         self.name = name
-        self.cRoom = cRoom
-    def __str__(self):
-        return f"{self.name}, is standing in the {self.cRoom}"
+        self.currentRoom = currentRoom
+        
+    def try_direction(self, command):
+        attribute = command + '_to'
+
+        # see if the current room has the attribute
+        # we can use a Python function called 'hasattr'
+        if hasattr(self.currentRoom, attribute):
+            # use 'getattr' to actually move to the room
+            self.currentRoom = getattr(self.currentRoom, attribute)
+        else:
+            print("You can't go that way!\n")
